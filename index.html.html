@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Tiempo Transcurrido</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      background: linear-gradient(to right, #c9d6ff, #e2e2e2);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .logo {
+      width: 120px;
+      height: auto;
+      margin-bottom: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      color: #333;
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+
+    input[type="date"] {
+      padding: 12px;
+      font-size: 18px;
+      border: 2px solid #ccc;
+      border-radius: 8px;
+      box-shadow: 2px 2px 5px rgba(0,0,0,0.1);
+      transition: border 0.3s;
+      width: 100%;
+      max-width: 300px;
+    }
+
+    input[type="date"]:focus {
+      border-color: #6a5acd;
+      outline: none;
+    }
+
+    button {
+      padding: 12px 24px;
+      font-size: 18px;
+      background-color: #6a5acd;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background-color: #5a4abf;
+    }
+
+    #resultado {
+      font-size: 20px;
+      color: #222;
+      margin-top: 30px;
+      padding: 10px 20px;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      max-width: 90%;
+    }
+
+    /* 📱 Diseño responsivo para pantallas pequeñas */
+    @media (max-width: 600px) {
+      .logo {
+        width: 160px;
+      }
+
+      h2 {
+        font-size: 32px;
+      }
+
+      input[type="date"], button {
+        font-size: 20px;
+        padding: 14px;
+      }
+
+      #resultado {
+        font-size: 22px;
+      }
+    }
+  footer {
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
+  text-align: center;
+  font-size: 16px;
+  color: #444;
+  padding: 10px 0;
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(3px);
+  box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 600px) {
+  footer {
+    font-size: 18px;
+  }
+}
+
+
+  </style>
+</head>
+<body>
+  <img src="devstorm.jpg" alt="Logo" class="logo">
+  <h2>Tiempo transcurrido desde una fecha</h2>
+  <input type="date" id="fechaInicio">
+  <button onclick="calcularTiempo()">Calcular</button>
+  <p id="resultado"></p>
+
+  <script>
+    function calcularTiempo() {
+      const fechaInicio = new Date(document.getElementById("fechaInicio").value);
+      const ahora = new Date();
+
+      if (isNaN(fechaInicio)) {
+        document.getElementById("resultado").innerText = "Por favor selecciona una fecha válida.";
+        return;
+      }
+
+      const diferencia = ahora - fechaInicio;
+
+      const dias = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+      const horas = Math.floor((diferencia % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutos = Math.floor((diferencia % (1000 * 60 * 60)) / (1000 * 60));
+      const segundos = Math.floor((diferencia % (1000 * 60)) / 1000);
+
+      document.getElementById("resultado").innerText =
+        `Han pasado ${dias} días, ${horas} horas, ${minutos} minutos y ${segundos} segundos.`;
+    }
+  </script>
+  <footer style="font-family: 'Courier New', Courier, monospace; color: #6c1cce; font-size: 24 px;">12BTPI</footer>
+
+</body>
+</html>
